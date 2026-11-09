@@ -20,6 +20,8 @@ import com.example.demo.dto.MovieResponseDTO;
 import com.example.demo.dto.MovieUpdateDTO;
 import com.example.demo.dto.Category.CategoryCreateDTO;
 import com.example.demo.dto.Category.CategoryResponseDTO;
+import com.example.demo.dto.Category.CategoryUpdateDTO;
+import com.example.demo.infra.Result;
 import com.example.demo.service.CategoryService;
 import com.example.demo.service.MovieService;
 
@@ -96,4 +98,25 @@ public class MovieController {
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(responseOptional.get());
     }
+    @PatchMapping("/categories/{id}")   
+    public ResponseEntity<?> updateCategoryById(@PathVariable Long id, @RequestBody @Valid CategoryUpdateDTO request) {
+        Result<CategoryResponseDTO> result = categoryService.updateCategoryById(id, request);
+       return switch (result) {
+            case Result.NotFound() ->
+                ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of(
+                "error", "Not_Found",
+                "message", "Category with ID " + id + " Not Found",
+                "code", "CATEGORY_NOT_FOUND"));
+
+            case Result.Conflict() ->
+                ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of(
+                "error", "Conflict",
+                "message", "Category with ID " + id + " already exists",
+                "code", "CATEGORY_ALREADY_EXISTS"
+                ));
+            case Result.Success(CategoryResponseDTO category) ->
+                ResponseEntity.ok(category);
+        };
+    }
+
 }

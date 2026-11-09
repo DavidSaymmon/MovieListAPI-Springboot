@@ -118,5 +118,16 @@ public class MovieController {
                 ResponseEntity.ok(category);
         };
     }
-
+    @DeleteMapping("/categories/{id}")
+    public ResponseEntity<?> deleteCategoryById(@PathVariable Long id) {
+        Result<?> result = categoryService.deleteCategoryById(id);
+        if (result instanceof Result.NotFound) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of(
+                    "error", "NOT_FOUND",
+                    "message", "a category with id " + id + " Was not found",
+                    "code", "CATEGORY_NOT_FOUND"
+            ));
+        }
+        return ResponseEntity.noContent().build();
+    }
 }

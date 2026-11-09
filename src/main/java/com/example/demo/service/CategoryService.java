@@ -28,6 +28,7 @@ public class CategoryService {
         categoryRepository.save(category);
         return Optional.of(CategoryMapper.convertCategoryToResponse(category));
     }
+    
     @Transactional 
     public Result<CategoryResponseDTO> updateCategoryById(Long id, CategoryUpdateDTO request) {
         Optional<Category> categoryOptional = categoryRepository.findById(id);
@@ -39,4 +40,12 @@ public class CategoryService {
         category.setName(request.name());
         return new Result.Success<CategoryResponseDTO>(CategoryMapper.convertCategoryToResponse(category));
     }
+        public Result<Void> deleteCategoryById(Long id) {
+        if (!categoryRepository.existsById(id)) {
+            return new Result.NotFound<>();
+        }
+        categoryRepository.deleteById(id);
+        return new Result.Success<>();
+    }
+
 }

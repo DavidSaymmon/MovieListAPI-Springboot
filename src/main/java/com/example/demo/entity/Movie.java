@@ -1,9 +1,12 @@
 package com.example.demo.entity;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.example.demo.enums.Category;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -11,6 +14,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.validation.constraints.NotBlank;
@@ -42,6 +46,21 @@ public class Movie {
     @Column(nullable = false)
     private LocalDateTime releaseDate;
 
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<MovieCategory> categories = new HashSet<>();
+
+    public Set<MovieCategory> getCategories() {
+        return categories;
+    }
+
+    public void updateCategories(Set<MovieCategory> newCategories) {
+        this.categories.removeIf(existing -> !newCategories.contains(existing));
+        for (MovieCategory category : newCategories) {
+            if (!this.categories.contains(category)) {
+                this.categories.add(category);
+            }
+        }
+    }
     @PrePersist
     public void onCreate() {
         LocalDateTime now = LocalDateTime.now();

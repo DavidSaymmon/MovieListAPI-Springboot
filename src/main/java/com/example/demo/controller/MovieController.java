@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.dto.MovieRequestDTO;
 import com.example.demo.dto.MovieResponseDTO;
 import com.example.demo.dto.MovieUpdateDTO;
+import com.example.demo.dto.Category.CategoryCreateDTO;
+import com.example.demo.dto.Category.CategoryResponseDTO;
+import com.example.demo.service.CategoryService;
 import com.example.demo.service.MovieService;
 
 import jakarta.validation.Valid;
@@ -29,6 +32,7 @@ import lombok.AllArgsConstructor;
 public class MovieController {
 
     private final MovieService movieService;
+    private final CategoryService categoryService;
 
     @PostMapping
     public ResponseEntity<MovieResponseDTO> createMovie(@Valid @RequestBody MovieRequestDTO request) {
@@ -78,5 +82,18 @@ public class MovieController {
             ));
         }
         return ResponseEntity.noContent().build();
+    }
+    
+        @PostMapping("/categories")
+    public ResponseEntity<?> createCategory(@RequestBody @Valid CategoryCreateDTO request) {
+        Optional<CategoryResponseDTO> responseOptional = categoryService.createCategory(request);
+        if(responseOptional.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of(
+                    "error", "Conflict",
+                    "message", "Category with name \"" + request.name() + "\" already exists",
+                    "code", "CATEGORY_ALREADY_EXISTS"
+            ));
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseOptional.get());
     }
 }

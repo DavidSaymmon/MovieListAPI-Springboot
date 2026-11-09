@@ -44,16 +44,26 @@ public class User{
     @Column(updatable=false)
     private Role role=Role.USER;
 
+    
     @PrePersist
-    public void onCreate(){
-        LocalDateTime now =  LocalDateTime.now(); 
-        createdAt= now;
+    public void onCreate() {
+        LocalDateTime now = LocalDateTime.now();
+        createdAt = now;
         updatedAt = now;
+        normalize();
     }
     @PreUpdate
-    public void onUpdate(){
-        updatedAt= LocalDateTime.now();
+    public void onUpdate() {
+        updatedAt = LocalDateTime.now();
+        normalize();
     }
+    private void normalize(){
+        if(this.email != null && this.name != null){
+            email=email.trim().toLowerCase();
+            name=name.trim();
+        }
+    }
+
     public Long getId() {
         return id;
     }
@@ -106,5 +116,8 @@ public class User{
     }
     public void setRole(Role role){
         this.role = role;
+    }
+    public void setName(String name){
+        this.name=name;
     }
 }

@@ -1,20 +1,28 @@
 package com.example.demo.entity;
+
 import java.io.Serializable;
 import java.util.Objects;
 
 import jakarta.persistence.Embeddable;
 
 @Embeddable
-public class UserMovieListKey implements Serializable{
-   private Long userId;
-   private Long movieId;
-   @Override
-   public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+public class UserMovieListKey implements Serializable {
+
+    private Long userId;
+    private Long movieId;
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         UserMovieListKey that = (UserMovieListKey) o;
-        return Objects.equals(userId, that.userId) && 
-               Objects.equals(movieId, that.movieId);
+        return Objects.equals(userId, that.userId)
+                && Objects.equals(movieId, that.movieId);
     }
 
     public UserMovieListKey() {

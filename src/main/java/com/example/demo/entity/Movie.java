@@ -45,6 +45,12 @@ public class Movie {
     private LocalDateTime updatedAt;
     @Column(nullable = false)
     private LocalDateTime releaseDate;
+    @Column(nullable = false)
+    private Double ratingAvg = 0.0;
+    @Column(nullable = false)
+    private Integer ratingSum = 0;
+    @Column(nullable = false)
+    private Integer ratingQty = 0;
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<MovieCategory> categories = new HashSet<>();
@@ -136,5 +142,38 @@ public class Movie {
 
     public void setDuration(Integer duration) {
         this.duration = duration;
+    }
+
+        public Double getRatingAvg() {
+        return ratingAvg;
+    }
+
+    public Integer getRatingSum() {
+        return ratingSum;
+    }
+
+    public Integer getRatingQty() {
+        return ratingQty;
+    }
+
+    public void updateRating(int oldScore, int newScore) {
+        ratingSum += newScore - oldScore;
+        updateAvgRating();
+    }
+
+    public void addRating(int score) {
+        ratingSum += score;
+        ratingQty++;
+        updateAvgRating();
+    }
+
+    public void removeRating(int score) {
+        ratingSum -= score;
+        ratingQty--;
+        updateAvgRating();
+    }
+
+    private void updateAvgRating() {
+        ratingAvg = ratingQty == 0 ? 0.0 : (double) ratingSum / ratingQty;
     }
 }

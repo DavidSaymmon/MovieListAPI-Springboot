@@ -130,4 +130,20 @@ public class MovieController {
         }
         return ResponseEntity.noContent().build();
     }
+    @GetMapping("/categories")
+    public ResponseEntity<List<CategoryResponseDTO>> getMoviesCategories() {
+        return ResponseEntity.ok(categoryService.getCategories());
+    }
+        @GetMapping("/categories/{id}")
+    public ResponseEntity<?> getCategoryById(@PathVariable Long id) {
+        Optional<CategoryResponseDTO> categoryOptional = categoryService.getCategoryById(id);
+        if (categoryOptional.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body((Map.of(
+                    "error", "NOT_FOUND",
+                    "message", "a category with id " + id + " Was not found",
+                    "code", "CATEGORY_NOT_FOUND"
+            )));
+        }
+        return ResponseEntity.ok(categoryOptional.get());
+    }
 }

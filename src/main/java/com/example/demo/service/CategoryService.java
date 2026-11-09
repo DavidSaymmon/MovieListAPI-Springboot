@@ -1,4 +1,6 @@
 package com.example.demo.service;
+
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -28,19 +30,28 @@ public class CategoryService {
         categoryRepository.save(category);
         return Optional.of(CategoryMapper.convertCategoryToResponse(category));
     }
-    
-    @Transactional 
+
+    public List<CategoryResponseDTO> getCategories() {
+        return categoryRepository.findAll().stream().map(CategoryMapper::convertCategoryToResponse).toList();
+    }
+
+    public Optional<CategoryResponseDTO> getCategoryById(Long id) {
+        return categoryRepository.findById(id).map(category -> CategoryMapper.convertCategoryToResponse(category));
+    }
+
+    @Transactional
     public Result<CategoryResponseDTO> updateCategoryById(Long id, CategoryUpdateDTO request) {
         Optional<Category> categoryOptional = categoryRepository.findById(id);
-        if(categoryOptional.isEmpty())
+        if (categoryOptional.isEmpty())
             return new Result.NotFound<>();
-        if(categoryRepository.findByName(request.name()).isPresent())
+        if (categoryRepository.findByName(request.name()).isPresent())
             return new Result.Conflict<>();
         Category category = categoryOptional.get();
         category.setName(request.name());
         return new Result.Success<CategoryResponseDTO>(CategoryMapper.convertCategoryToResponse(category));
     }
-        public Result<Void> deleteCategoryById(Long id) {
+
+    public Result<Void> deleteCategoryById(Long id) {
         if (!categoryRepository.existsById(id)) {
             return new Result.NotFound<>();
         }

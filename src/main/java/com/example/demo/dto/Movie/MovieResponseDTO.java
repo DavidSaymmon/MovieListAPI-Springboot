@@ -1,18 +1,19 @@
 package com.example.demo.dto.Movie;
 
 import java.time.LocalDateTime;
-
-import com.example.demo.enums.Category;
+import java.util.List;
 
 public record MovieResponseDTO(
     Long id,
-    Category category,
+    List<String> categories,
     String name,
     String language,
     LocalDateTime releaseDate,
     LocalDateTime createdAt,
     LocalDateTime updatedAt,
-    Integer duration
+    Integer duration,
+    Double ratingAvg,
+    Integer ratingQty
 ) {
 
 }

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.dto.Category.CategoryCreateDTO;
 import com.example.demo.dto.Category.CategoryResponseDTO;
 import com.example.demo.dto.Category.CategoryUpdateDTO;
-import com.example.demo.dto.Movie.MovieRequestDTO;
+import com.example.demo.dto.Movie.MovieCreateDTO;
 import com.example.demo.dto.Movie.MovieResponseDTO;
 import com.example.demo.dto.Movie.MovieUpdateDTO;
 import com.example.demo.infra.Result;
@@ -37,7 +37,7 @@ public class MovieController {
     private final CategoryService categoryService;
 
     @PostMapping
-    public ResponseEntity<MovieResponseDTO> createMovie(@Valid @RequestBody MovieRequestDTO request) {
+    public ResponseEntity<MovieResponseDTO> createMovie(@Valid @RequestBody MovieCreateDTO request) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(this.movieService.createMovie(request));
     }
@@ -86,7 +86,7 @@ public class MovieController {
         return ResponseEntity.noContent().build();
     }
     
-        @PostMapping("/categories")
+    @PostMapping("/categories")
     public ResponseEntity<?> createCategory(@RequestBody @Valid CategoryCreateDTO request) {
         Optional<CategoryResponseDTO> responseOptional = categoryService.createCategory(request);
         if(responseOptional.isEmpty()) {
@@ -134,7 +134,7 @@ public class MovieController {
     public ResponseEntity<List<CategoryResponseDTO>> getMoviesCategories() {
         return ResponseEntity.ok(categoryService.getCategories());
     }
-        @GetMapping("/categories/{id}")
+    @GetMapping("/categories/{id}")
     public ResponseEntity<?> getCategoryById(@PathVariable Long id) {
         Optional<CategoryResponseDTO> categoryOptional = categoryService.getCategoryById(id);
         if (categoryOptional.isEmpty()) {

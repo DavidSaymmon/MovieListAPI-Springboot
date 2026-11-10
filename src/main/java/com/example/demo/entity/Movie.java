@@ -81,7 +81,13 @@ public class Movie {
 
     public Movie() {
     }
-
+    public Movie(String name, String language, LocalDateTime releaseDate,
+            Integer duration) {
+        this.name = name;
+        this.language = language;
+        this.releaseDate = releaseDate;
+        this.duration = duration;
+    }
     public Movie(Category category,
             String name, String language, LocalDateTime releaseDate,
             Integer duration) {

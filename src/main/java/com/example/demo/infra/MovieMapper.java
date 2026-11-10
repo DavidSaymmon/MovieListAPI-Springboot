@@ -1,14 +1,13 @@
 package com.example.demo.infra;
 
-import com.example.demo.dto.Movie.MovieRequestDTO;
+import com.example.demo.dto.Movie.MovieCreateDTO;
 import com.example.demo.dto.Movie.MovieResponseDTO;
 import com.example.demo.entity.Movie;
 
 public class MovieMapper {
 
-    public static Movie convertRequestToMovie(MovieRequestDTO request) {
+    public static Movie convertRequestToMovie(MovieCreateDTO request) {
         return new Movie(
-                request.category(),
                 request.name(),
                 request.language(),
                 request.releaseDate(),
@@ -18,13 +17,18 @@ public class MovieMapper {
     public static MovieResponseDTO convertMovieToResponse(Movie movie){
         return new MovieResponseDTO(
             movie.getId(),
-            movie.getCategory(),
+            movie.getCategories()
+                .stream()
+                .map(movieCategory -> movieCategory.getCategory().getName())
+                .toList(),
             movie.getName(),
             movie.getLanguage(),
             movie.getReleaseDate(),
             movie.getCreatedAt(),
             movie.getUpdatedAt(),
-            movie.getDuration()
+            movie.getDuration(),
+            movie.getRatingAvg(),
+            movie.getRatingQty()
         );
     }
 }

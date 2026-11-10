@@ -5,9 +5,9 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.example.demo.dto.MovieRequestDTO;
-import com.example.demo.dto.MovieResponseDTO;
-import com.example.demo.dto.MovieUpdateDTO;
+import com.example.demo.dto.Movie.MovieRequestDTO;
+import com.example.demo.dto.Movie.MovieResponseDTO;
+import com.example.demo.dto.Movie.MovieUpdateDTO;
 import com.example.demo.entity.Movie;
 import com.example.demo.infra.MovieMapper;
 import com.example.demo.repository.MovieRepository;

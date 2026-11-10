@@ -9,3 +9,7 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 	}	            	
 }
+//To Do: resolver problemas de CaseSentitive em atributos únicos
+//To Do: resolver condições de corrida
+//To Do: Tratar Exceptions
+//To DO: otimizar transactions

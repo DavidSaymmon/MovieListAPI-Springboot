@@ -6,8 +6,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.dto.RegisterRequestDTO;
 import com.example.demo.dto.UserResponseDTO;
+import com.example.demo.dto.Auth.RegisterRequestDTO;
 import com.example.demo.entity.User;
 import com.example.demo.infra.UserMapper;
 import com.example.demo.repository.UserRepository;

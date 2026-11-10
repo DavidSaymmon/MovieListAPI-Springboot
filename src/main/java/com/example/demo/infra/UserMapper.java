@@ -1,8 +1,8 @@
 package com.example.demo.infra;
 
-import com.example.demo.dto.AuthResponseDTO;
-import com.example.demo.dto.RegisterRequestDTO;
 import com.example.demo.dto.UserResponseDTO;
+import com.example.demo.dto.Auth.AuthResponseDTO;
+import com.example.demo.dto.Auth.RegisterRequestDTO;
 import com.example.demo.entity.User;
 
 public class UserMapper {

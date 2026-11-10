@@ -1,10 +1,9 @@
-package com.example.demo.dto;
+package com.example.demo.dto.Movie;
 
 import java.time.LocalDateTime;
 
 import com.example.demo.enums.Category;
 
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 

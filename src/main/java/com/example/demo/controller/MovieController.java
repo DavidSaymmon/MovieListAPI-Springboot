@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.dto.MovieRequestDTO;
-import com.example.demo.dto.MovieResponseDTO;
-import com.example.demo.dto.MovieUpdateDTO;
 import com.example.demo.dto.Category.CategoryCreateDTO;
 import com.example.demo.dto.Category.CategoryResponseDTO;
 import com.example.demo.dto.Category.CategoryUpdateDTO;
+import com.example.demo.dto.Movie.MovieRequestDTO;
+import com.example.demo.dto.Movie.MovieResponseDTO;
+import com.example.demo.dto.Movie.MovieUpdateDTO;
 import com.example.demo.infra.Result;
 import com.example.demo.service.CategoryService;
 import com.example.demo.service.MovieService;

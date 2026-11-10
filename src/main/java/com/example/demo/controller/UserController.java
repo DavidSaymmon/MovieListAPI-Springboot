@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.dto.RegisterRequestDTO;
 import com.example.demo.dto.UserResponseDTO;
+import com.example.demo.dto.Auth.RegisterRequestDTO;
 import com.example.demo.service.UserService;
 
 import jakarta.validation.Valid;

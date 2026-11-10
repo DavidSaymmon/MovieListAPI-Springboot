@@ -1,7 +1,7 @@
 package com.example.demo.infra;
 
-import com.example.demo.dto.MovieRequestDTO;
-import com.example.demo.dto.MovieResponseDTO;
+import com.example.demo.dto.Movie.MovieRequestDTO;
+import com.example.demo.dto.Movie.MovieResponseDTO;
 import com.example.demo.entity.Movie;
 
 public class MovieMapper {

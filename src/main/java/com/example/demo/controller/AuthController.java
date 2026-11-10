@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.dto.AuthResponseDTO;
-import com.example.demo.dto.LoginRequestDTO;
-import com.example.demo.dto.RegisterRequestDTO;
+import com.example.demo.dto.Auth.AuthResponseDTO;
+import com.example.demo.dto.Auth.LoginRequestDTO;
+import com.example.demo.dto.Auth.RegisterRequestDTO;
 import com.example.demo.service.AuthService;
 
 import jakarta.validation.Valid;

@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.example.demo.dto.MovieResponseDTO;
+import com.example.demo.dto.Movie.MovieResponseDTO;
 import com.example.demo.entity.Movie;
 import com.example.demo.entity.User;
 import com.example.demo.entity.UserMovieList;

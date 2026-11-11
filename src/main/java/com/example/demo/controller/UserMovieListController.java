@@ -17,10 +17,9 @@ import com.example.demo.dto.Movie.MovieResponseDTO;
 import com.example.demo.entity.User;
 import com.example.demo.infra.Result;
 import com.example.demo.service.UserMovieListService;
+import lombok.RequiredArgsConstructor;
 
-import lombok.AllArgsConstructor;
-
-@AllArgsConstructor
+@RequiredArgsConstructor 
 @RestController
 @RequestMapping("/user/movie-list")
 public class UserMovieListController {

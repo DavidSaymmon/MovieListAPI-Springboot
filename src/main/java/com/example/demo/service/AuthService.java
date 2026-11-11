@@ -13,8 +13,8 @@ import com.example.demo.entity.User;
 import com.example.demo.infra.UserMapper;
 import com.example.demo.repository.UserRepository;
 
-import lombok.AllArgsConstructor;
-@AllArgsConstructor
+import lombok.RequiredArgsConstructor;
+@RequiredArgsConstructor 
 @Service
 public class AuthService {
     private final UserRepository userRepository;

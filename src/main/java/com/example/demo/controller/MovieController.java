@@ -26,9 +26,9 @@ import com.example.demo.service.CategoryService;
 import com.example.demo.service.MovieService;
 
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
-@AllArgsConstructor
+@RequiredArgsConstructor 
 @RequestMapping("/movies")
 @RestController
 public class MovieController {

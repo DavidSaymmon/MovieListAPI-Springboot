@@ -15,10 +15,10 @@ import com.example.demo.infra.Result;
 import com.example.demo.repository.MovieRepository;
 import com.example.demo.repository.UserMovieListRepository;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserMovieListService {
 
     private final UserMovieListRepository userMovieListRepository;

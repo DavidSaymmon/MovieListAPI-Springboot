@@ -29,7 +29,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-@RequestMapping("/movie")
+@RequestMapping("/movies")
 @RestController
 public class MovieController {
 

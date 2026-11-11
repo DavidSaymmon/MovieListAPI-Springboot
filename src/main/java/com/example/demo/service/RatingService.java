@@ -5,10 +5,12 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.Movie.MovieResponseDTO;
+import com.example.demo.entity.Movie;
 import com.example.demo.entity.Rating;
 import com.example.demo.entity.RatingKey;
 import com.example.demo.entity.User;
 import com.example.demo.infra.MovieMapper;
+import com.example.demo.infra.Result;
 import com.example.demo.repository.MovieRepository;
 import com.example.demo.repository.RatingRepository;
 
@@ -39,4 +41,18 @@ public class RatingService {
             return MovieMapper.convertMovieToResponse(movie);
         });
     }
+    
+    @Transactional
+    public Result<Void> deleteRatingById(User user, Long movieId) {
+        RatingKey key = new RatingKey(user.getId(), movieId);
+        Rating rating = ratingRepository.findById(key).orElse(null);
+        if (rating == null) {
+            return new Result.NotFound<>();
+        }
+        ratingRepository.deleteById(key);
+            Movie movie = rating.getMovie();
+            movie.removeRating(rating.getScore());
+        return new Result.Success<>(null);
+    }
+
 }

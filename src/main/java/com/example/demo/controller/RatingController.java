@@ -1,4 +1,5 @@
 package com.example.demo.controller;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -6,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.Movie.MovieResponseDTO;
 import com.example.demo.dto.Rating.RatingRequestDTO;
+import com.example.demo.dto.Rating.RatingResponseDTO;
 import com.example.demo.entity.User;
 import com.example.demo.infra.Result;
 import com.example.demo.service.RatingService;
@@ -47,6 +50,16 @@ public class RatingController {
                             + " was not found in the database",
                     "code", "RATING_NOT_FOUND"));
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/users/{id}/movieRating")
+    public ResponseEntity<?> getRatingsByUserID(@PathVariable("id") Long userId) {
+        Result<List<RatingResponseDTO>> result = ratingService.getRatingsByUser(userId);
+        if (result instanceof Result.Success<List<RatingResponseDTO>> success)
+            return ResponseEntity.ok().body(success.obj());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "NOT_FOUND", "message",
+                "A Rating with userId " + userId + " was not found in the database",
+                "code", "USER_NOT_FOUND"));
     }
 
 }

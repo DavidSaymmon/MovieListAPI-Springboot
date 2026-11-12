@@ -27,7 +27,6 @@ public class JwtService {
                 withSubject(user.getEmail()).
                 withClaim("userId", user.getId())
                 .withIssuedAt(Date.from(now))
-                //To do.withExpiresAt()
                 .sign(algorithm);
     }
 

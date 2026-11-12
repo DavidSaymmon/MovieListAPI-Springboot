@@ -51,12 +51,3 @@ public class UserMovieListService {
         return new Result.Success<>(null);
     }
 }
-/*Anotações de Estudo:
-    addMovieToList()
-        resolvi adotar um resultPattern, visando garantir o tratamento diferente dos 
-        3 fluxos(filme adicionado, filme inexistente no BD e filme já presente),
-        por não saber o quão excepcional seria o coportamento, dispensei exceções, dado seu custo computacional.
-    deleteById()
-        reutilizei a engenharia do ResultPattern do addMovieToList()
-        no deleteById() para cobrir os 2 fluxos do método de forma limpa e padronizada.
-*/

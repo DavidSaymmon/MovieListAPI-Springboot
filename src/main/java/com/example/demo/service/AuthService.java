@@ -40,9 +40,3 @@ public class AuthService {
         return Optional.of(UserMapper.toAuthResponse(user, jwtService.generateToken(user)));
     }
 }
-/*
-Anotações de Estudo:
-    usei um retorno de Optional vazio para lidar com casos normais de tentativa de uso de e-mail duplicado
-    e um try catch para lidar com condições de corrida, ex:
-    múltiplos cliques num botão de registro num front mal formulado.
- */

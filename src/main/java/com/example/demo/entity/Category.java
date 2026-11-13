@@ -53,7 +53,7 @@ public class Category{
 
     private void normalize() {
         if (this.name != null) {
-            this.name = this.name.trim().toLowerCase();
+            this.name = this.name.strip().toLowerCase();
         }
     }
 

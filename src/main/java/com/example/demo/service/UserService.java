@@ -21,7 +21,7 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     
     public Optional<UserResponseDTO> createUser (RegisterRequestDTO request){
-        if(userRepository.existsByEmail(request.email())) 
+        if(userRepository.existsByEmail(request.email().toLowerCase())) 
             return Optional.empty(); 
         try{
             User user = UserMapper.convertRequestToUser(request);

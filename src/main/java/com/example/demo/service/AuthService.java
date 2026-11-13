@@ -21,11 +21,12 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder; 
     private final JwtService jwtService;
     public Optional<AuthResponseDTO> register (RegisterRequestDTO request){
-        if(userRepository.existsByEmail(request.email()))
+        if(userRepository.existsByEmail(normalize(request.email())))
             return Optional.empty();
         try{   
             User user = UserMapper.convertRequestToUser(request);
             user.setPassword(passwordEncoder.encode(request.password()));
+            user.setEmail(normalize(user.getEmail()));
             userRepository.save(user);
             return Optional.of(UserMapper.toAuthResponse(user, jwtService.generateToken(user)));
         }
@@ -34,9 +35,12 @@ public class AuthService {
         }
     }
     public Optional<AuthResponseDTO> login(LoginRequestDTO request){
-        User user = userRepository.findByEmail(request.email()).orElse(null);                
+        User user = userRepository.findByEmail(normalize(request.email())).orElse(null);
         if(user == null || !passwordEncoder.matches(request.password(), user.getPassword()))
             return Optional.empty();
         return Optional.of(UserMapper.toAuthResponse(user, jwtService.generateToken(user)));
     }
+    private String normalize(String string){
+        return string.strip().toLowerCase();
+    }   
 }

@@ -58,9 +58,11 @@ public class User{
         normalize();
     }
     private void normalize(){
-        if(this.email != null && this.name != null){
-            email=email.trim().toLowerCase();
-            name=name.trim();
+        if (this.email != null) {
+            this.email = this.email.strip().toLowerCase();
+        }
+        if (this.name != null) {
+            this.name = this.name.strip();
         }
     }
 
@@ -119,5 +121,8 @@ public class User{
     }
     public void setName(String name){
         this.name=name;
+    }
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

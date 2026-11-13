@@ -28,9 +28,9 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests((authorize -> authorize.requestMatchers(HttpMethod.POST, "/auth/login", "/auth/register").
                 permitAll().requestMatchers("/h2-console/**").//Obs: por ser um projeto de estudos, deixarei o h2-console público.
-                permitAll().requestMatchers(HttpMethod.DELETE, "/users/{id}", "/movie/**").hasRole("ADMIN").
-                requestMatchers(HttpMethod.PATCH, "/movie/**").hasRole("ADMIN").
-                requestMatchers(HttpMethod.POST, "/users", "/movie").hasRole("ADMIN").
+                permitAll().requestMatchers(HttpMethod.DELETE, "/users/{id}", "/movies/**").hasRole("ADMIN").
+                requestMatchers(HttpMethod.PATCH, "/movies/**").hasRole("ADMIN").
+                requestMatchers(HttpMethod.POST, "/users", "/movies").hasRole("ADMIN").
                 requestMatchers(HttpMethod.GET, "/users","/users/{id}").hasRole("ADMIN").
                 anyRequest().authenticated())).headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class).build();
